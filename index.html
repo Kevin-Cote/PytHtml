@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Bouton Épique Fonctionnel</title>
+  <style>
+    .gros-bouton {
+      font-size: 48px;
+      padding: 40px 80px;
+      border-radius: 50px;
+      border: none;
+      background-color: #ff6f00;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .gros-bouton:hover {
+      background-color: #e65100;
+      transform: scale(1.05);
+    }
+    .gros-bouton:active {
+      transform: scale(0.95);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: radial-gradient(circle at center, #1e1e1e, #000);
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#" class="gros-bouton" id="boutonEpic">✦ CLIQUE ÉPIQUE ✦</a>
+
+  <audio id="epicSound" preload="auto">
+    <source src="bell-ringing-05.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    const bouton = document.getElementById('boutonEpic');
+    const son = document.getElementById('epicSound');
+
+    bouton.addEventListener('click', function(event) {
+      event.preventDefault();
+      console.log('Clic détecté, lecture du son');
+
+      son.currentTime = 0;
+      const playPromise = son.play();
+
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          console.log('Son en lecture');
+
+          son.onended = function() {
+            console.log('Son fini, redirection');
+            window.location.href = "https://www.google.com";
+          };
+        }).catch(error => {
+          console.error('Erreur lecture son:', error);
+          window.location.href = "https://www.google.com";
+        });
+      } else {
+        window.location.href = "https://www.google.com";
+      }
+    });
+  </script>
+    <header></header>
+    <main></main>
+    <footer></footer>
+  </body>
+</html>
